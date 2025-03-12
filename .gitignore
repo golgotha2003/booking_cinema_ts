@@ -128,3 +128,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+#package-lock
+package-lock.json
+
+
+# Bỏ qua các file build của TypeScript
+dist/
+out/
