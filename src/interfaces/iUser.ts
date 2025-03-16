@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document, Model } from "mongoose";
 import { Role } from "../utils/user/role.enum";
 
 export interface IUser extends Document {
@@ -8,4 +8,10 @@ export interface IUser extends Document {
     full_name: string;
     phone: string;
     role: Role;
+    is_active: boolean;
+    is_locked: boolean;
+}
+
+export interface IUserModel extends Model<IUser> {
+    findByCredentials(email: string, password: string): Promise<IUser>;
 }
