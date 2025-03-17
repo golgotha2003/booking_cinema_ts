@@ -1,17 +1,32 @@
 import { ITheater } from "../interfaces/iTheater";
 import Theater from "../models/theater";
 
+
+/**
+ * Service class for managing theaters
+ */
 class TheaterService {
+    /**
+     * Get all theaters
+     */
     getAllTheaters = async () => {
         const theaters = await Theater.find();
         return theaters;
     }
 
+    /**
+     * Get theater by id
+     * @param id - Id of the theater
+     */
     getTheaterById = async (id: string) => {
         const theater = await Theater.findById(id);
         return theater;
     }
 
+    /**
+     * Add a new theater
+     * @param theater - Theater to add
+     */
     addTheater = async (theater: ITheater) => {
         const existingTheater = await Theater.findOne({theater: theater.name});
 
@@ -24,6 +39,11 @@ class TheaterService {
         return newTheater;
     }
 
+    /**
+     * Update a theater
+     * @param id - Id of the theater
+     * @param theater - Theater to update
+     */
     updateTheater = async (id: string, theater: ITheater) => {
         const existingTheater = await Theater.findById(id);
 
@@ -38,6 +58,10 @@ class TheaterService {
         return existingTheater;
     }
 
+    /**
+     * Delete a theater
+     * @param id - Id of the theater
+     */
     deleteTheater = async (id: string) => {
         const theater = await Theater.findByIdAndDelete(id);
         
@@ -48,3 +72,4 @@ class TheaterService {
 }
 
 export default new TheaterService();
+

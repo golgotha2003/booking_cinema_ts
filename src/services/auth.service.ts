@@ -6,7 +6,15 @@ import { generateToken } from "../utils/token/generateToken";
 import { phoneValidator } from "../validator/phone.validator";
 import { verifyOtp } from "./otp.service";
 
+/**
+ * AuthService handles authentication related operations
+ */
 class AuthService {
+  /**
+   * signUp creates a new user
+   * @param user user info
+   * @returns user info and message
+   */
   signUp = async (user: SignUpRequestDto): Promise<AuthResponseDto> => {
     const existingUser = await User.findOne({ email: user.email });
     if (existingUser) throw new Error("Email already exist");
@@ -19,6 +27,12 @@ class AuthService {
     return { message: "Sign up successfully", user: newUser };
   };
 
+  /**
+   * signIn signs in a user
+   * @param email user email
+   * @param password user password
+   * @returns user info, access token, and message
+   */
   signIn = async (
     email: string,
     password: string
@@ -42,6 +56,13 @@ class AuthService {
     };
   };
 
+  /**
+   * verifySignUp verifies a user's sign up
+   * @param email user email
+   * @param otp one time password
+   * @param session session
+   * @returns user info, access token, and message
+   */
   verifySignUp = async (
     email: string,
     otp: string,
@@ -59,6 +80,11 @@ class AuthService {
     return {message: "Sign up successfully", access_token: token, user: user };
   };
 
+  /**
+   * forgotPassword sends an OTP to the user
+   * @param email user email
+   * @returns user info
+   */
   forgotPassword = async(email: string) => {
 
     const user = await User.findOne({ email });
@@ -67,6 +93,12 @@ class AuthService {
     return {user: user};
   }
 
+  /**
+   * verifyPassword verifies a user's password
+   * @param email user email
+   * @param otp one time password
+   * @param session session
+   */
   verifyPassword = async (
     email: string,
     otp: string,
@@ -75,6 +107,11 @@ class AuthService {
     await verifyOtp(email, otp, session);
   };
 
+  /**
+   * resetPassword resets a user's password
+   * @param email user email
+   * @param password user password
+   */
   resetPassword = async (
     email: string,
     password: string,

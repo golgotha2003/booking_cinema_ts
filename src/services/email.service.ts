@@ -11,6 +11,12 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+/**
+ * Send an email to the user with OTP code
+ * @param email user's email
+ * @param otp OTP code
+ * @returns true if success, false if failed
+ */
 export const sendEmail = async (email: string, otp: string) => {
     try {
         const mailOptions = {

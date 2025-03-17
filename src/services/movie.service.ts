@@ -1,13 +1,23 @@
 import { IMovie } from "../interfaces/iMovie";
 import Movie from "../models/movie";
 
+/**
+ * Service class for movie model
+ */
 class MovieService {
+    /**
+     * Get all movies
+     */
     getAllMovies = async () => {
         const movies = await Movie.find();
 
         return movies;
     }
 
+    /**
+     * Get a movie by id
+     * @param id movie id
+     */
     getMovieById = async (id: string) => {
         const movie = await Movie.findById(id);
 
@@ -16,18 +26,30 @@ class MovieService {
         return movie;
     }
 
+    /**
+     * Search movies by title
+     * @param query search query
+     */
     searchMovie = async (query: string) => {
         const movies = await Movie.find({ title: { $regex: query, $options: "i" } });
 
         return movies;
     }
 
+    /**
+     * Get movies by genre
+     * @param genre movie genre
+     */
     getMoviesByGenre = async (genre: string) => {
         const movies = await Movie.find({ genre });
 
         return movies;
     }
 
+    /**
+     * Add a new movie
+     * @param movie movie data
+     */
     addMovie = async (movie: IMovie) => {
 
         const existingMovie = await Movie.findOne({ title: movie.title });
@@ -41,6 +63,11 @@ class MovieService {
         return newMovie;
     }
 
+    /**
+     * Update a movie
+     * @param id movie id
+     * @param movie movie data
+     */
     updateMovie = async (id: string, movie: IMovie) => {
         const existingMovie = await Movie.findById(id);
 
@@ -62,6 +89,10 @@ class MovieService {
         return existingMovie;
     }
 
+    /**
+     * Delete a movie
+     * @param id movie id
+     */
     deleteMovie = async (id: string) => {
         const existingMovie = await Movie.findById(id);
 
