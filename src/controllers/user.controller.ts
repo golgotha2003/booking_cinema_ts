@@ -4,7 +4,8 @@ import { CurrentResponseDto } from "../dto/res/user.res.dto";
 
 class UserController {
   getCurrent = async (req: Request, res: Response) => {
-    const email = req.session.email as string;
+    try{
+      const email = req.session.email as string;
 
     const user = await userService.getCurrent(email);
 
@@ -13,10 +14,19 @@ class UserController {
       message: "Get current user successfully",
       user: user,
     });
+    }
+    catch(err){
+      return res.status(400).json({
+        success: false,
+        message: "Get current user failed",
+        error: err instanceof Error ? err.message : err,
+      });
+    }
   };
 
   updateCurrent = async (req: Request, res: Response) => {
-    const user = req.body as CurrentResponseDto;
+    try{
+      const user = req.body as CurrentResponseDto;
 
     await userService.updateCurrent(user);
 
@@ -25,16 +35,24 @@ class UserController {
       message: "Update current user successfully",
       user: user,
     });
+    }
+    catch(err){
+      return res.status(400).json({
+        success: false,
+        message: "Update current user failed",
+        error: err instanceof Error ? err.message : err,
+      });
+    }
   };
 
   changePassword = async (req: Request, res: Response) => {
-    const email = req.session.email as string;
+    try{
+      const email = req.session.email as string;
     const oldPassword = req.body.oldPassword as string;
     const newPassword = req.body.newPassword as string;
 
     await userService.changePassword(email, oldPassword, newPassword);
 
-    if (req.session.access_token) {
       await new Promise<void>((resolve, reject) => {
         req.session.destroy((err) => {
           if (err) {
@@ -49,11 +67,13 @@ class UserController {
         message: "Reset password successfully, please sign in again",
       });
     }
-
-    return res.status(200).json({
-      success: true,
-      message: "Change password successfully",
-    });
+    catch(err){
+      return res.status(400).json({
+        success: false,
+        message: "Reset password failed",
+        error: err instanceof Error ? err.message : err,
+      });
+    }
   };
 }
 
