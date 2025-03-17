@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IReview } from "../interfaces/iReview";
+import Movie from "./movie";
 
 const ReviewSchema = new Schema<IReview>({
     user_id: {
@@ -15,14 +16,26 @@ const ReviewSchema = new Schema<IReview>({
     rating: {
         type: Number,
         required: true,
+        min: 1,
+        max: 5
     },
     comment: {
-        type: String,
-        required: true,
+        type: String
     }
 }, {
     timestamps: true
 });
+
+ReviewSchema.post("save", async function () {
+    await updateMovieRating(this.movie_id.toString());
+});
+
+async function updateMovieRating(movieId: string) {
+    const reviews = await Review.find({ movie_id: movieId });
+    const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+    const averageRating = totalRating / reviews.length;
+    await Movie.updateOne({ _id: movieId }, { rating: averageRating });
+}
 
 const Review = mongoose.model<IReview>("Review", ReviewSchema);
 

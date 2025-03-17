@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { ISeat } from "../interfaces/iSeat";
 import { SeatType } from "../utils/seat/type.enum";
+import { SeatStatus } from "../utils/seat/status.enum";
 
 const SeatSchema = new Schema<ISeat>(
   {
@@ -28,6 +29,11 @@ const SeatSchema = new Schema<ISeat>(
       enum: Object.values(SeatType),
       default: SeatType.STANDARD,
     },
+    status: {
+      type: String,
+      enum: Object.values(SeatStatus),
+      default: SeatStatus.AVAILABLE,
+    }
   },
   {
     timestamps: true,

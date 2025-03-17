@@ -4,32 +4,32 @@ import authMiddleware from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.post('/sign-up', (req: Request, res: Response, next: NextFunction) => {
-  authController.signUp(req, res).catch(next);
+router.post('/sign-up', async (req: Request, res: Response, next: NextFunction) => {
+  await authController.signUp(req, res).catch(next);
 });
 
-router.post('/sign-in', authMiddleware.checkLogin,(req: Request, res: Response, next: NextFunction) => {
-  authController.signIn(req, res).catch(next);
+router.post('/sign-in', authMiddleware.checkLogin, async (req: Request, res: Response, next: NextFunction) => {
+  await authController.signIn(req, res).catch(next);
 });
 
-router.post('/sign-out', authMiddleware.isSignIn, (req: Request, res: Response, next: NextFunction) => {
-  authController.signOut(req, res).catch(next);
+router.delete('/sign-out', authMiddleware.isSignIn, async (req: Request, res: Response, next: NextFunction) => {
+  await authController.signOut(req, res).catch(next);
 });
 
-router.post('/verify-sign-up', (req: Request, res: Response, next: NextFunction) => {
-  authController.verifySignUp(req, res).catch(next);
+router.post('/verify-sign-up', async (req: Request, res: Response, next: NextFunction) => {
+  await authController.verifySignUp(req, res).catch(next);
 });
 
-router.post('/forgot-password', (req: Request, res: Response, next: NextFunction) => {
-  authController.forgotPassword(req, res).catch(next);
+router.post('/forgot-password', async (req: Request, res: Response, next: NextFunction) => {
+  await authController.forgotPassword(req, res).catch(next);
 });
 
-router.post('/verify-password', (req: Request, res: Response, next: NextFunction) => {
-  authController.verifyPassword(req, res).catch(next);
+router.post('/verify-password', async (req: Request, res: Response, next: NextFunction) => {
+  await authController.verifyPassword(req, res).catch(next);
 });
 
-router.post('/reset-password', (req: Request, res: Response, next: NextFunction) => {
-  authController.resetPassword(req, res).catch(next);
+router.put('/reset-password', async (req: Request, res: Response, next: NextFunction) => {
+  await authController.resetPassword(req, res).catch(next);
 });
 
 export default router;

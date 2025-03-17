@@ -3,16 +3,16 @@ import userController from "../controllers/user.controller";
 
 const router = Router();
 
-router.get('/get-current', (req: Request, res: Response, next: NextFunction) => {
-    userController.getCurrent(req, res).catch(next);
+router.get('/get-current', async (req: Request, res: Response, next: NextFunction) => {
+    await userController.getCurrent(req, res).catch(next);
 });
 
-router.post('/update-current', (req: Request, res: Response, next: NextFunction) => {
-    userController.updateCurrent(req, res).catch(next);
+router.put('/update-current', async (req: Request, res: Response, next: NextFunction) => {
+    await userController.updateCurrent(req, res).catch(next);
 });
 
-router.post('/change-password', (req: Request, res: Response, next: NextFunction) => {
-    userController.changePassword(req, res).catch(next);
+router.put('/change-password', async (req: Request, res: Response, next: NextFunction) => {
+    await userController.changePassword(req, res).catch(next);
 });
 
 export default router;

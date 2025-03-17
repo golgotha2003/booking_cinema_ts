@@ -21,6 +21,8 @@ class UserService {
         existingUser.phone = user.phone;
 
         await existingUser.save();
+
+        return existingUser.toObject() as CurrentResponseDto;
     }
 
     changePassword = async (email: string, oldPassword: string, newPassword: string) => {

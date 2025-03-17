@@ -14,19 +14,22 @@ const transporter = nodemailer.createTransport({
 export const sendEmail = async (email: string, otp: string) => {
     try {
         const mailOptions = {
-            from: "BOOKING CINEMA",
+            from: '"BOOKING_CINEMA" <no-reply@bookingcinema.com>',
             to: email,
             subject: "Your OTP Code",
             html: `
-                <div style="font-family: Arial, sans-serif; padding: 20px;">
-                    <h2 style="color: #333;">OTP Confirmation</h2>
-                    <p>Your OTP code is:</p>
-                    <h3 style="background-color: #f4f4f4; padding: 10px; display: inline-block;">${otp}</h3>
-                    <p>The OTP code is valid for 5 minutes.</p>
-                    <p>If you did not request this code, please ignore this email.</p>
+                <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 40px; text-align: center;">
+                    <div style="max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: auto;">
+                        <h2 style="color: #007bff; margin-bottom: 20px;">OTP Confirmation</h2>
+                        <p style="font-size: 16px; color: #333; margin-bottom: 15px;">Your OTP code is:</p>
+                        <h3 style="background: #007bff; color: white; padding: 12px 20px; display: inline-block; border-radius: 6px; font-size: 24px; letter-spacing: 2px;">${otp}</h3>
+                        <p style="font-size: 14px; color: #777; margin-top: 15px;">This OTP is valid for <strong>5 minutes</strong>.</p>
+                        <p style="font-size: 14px; color: #777;">If you did not request this code, please ignore this email.</p>
+                    </div>
                 </div>
             `,
         };
+        
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {

@@ -4,18 +4,17 @@ import { CurrentResponseDto } from "../dto/res/user.res.dto";
 
 class UserController {
   getCurrent = async (req: Request, res: Response) => {
-    try{
+    try {
       const email = req.session.email as string;
 
-    const user = await userService.getCurrent(email);
+      const user = await userService.getCurrent(email);
 
-    return res.status(200).json({
-      success: true,
-      message: "Get current user successfully",
-      user: user,
-    });
-    }
-    catch(err){
+      return res.status(200).json({
+        success: true,
+        message: "Get current user successfully",
+        user: user,
+      });
+    } catch (err) {
       return res.status(400).json({
         success: false,
         message: "Get current user failed",
@@ -25,18 +24,17 @@ class UserController {
   };
 
   updateCurrent = async (req: Request, res: Response) => {
-    try{
+    try {
       const user = req.body as CurrentResponseDto;
 
-    await userService.updateCurrent(user);
+      const updateUser = await userService.updateCurrent(user);
 
-    return res.status(200).json({
-      success: true,
-      message: "Update current user successfully",
-      user: user,
-    });
-    }
-    catch(err){
+      return res.status(200).json({
+        success: true,
+        message: "Update current user successfully",
+        user: updateUser,
+      });
+    } catch (err) {
       return res.status(400).json({
         success: false,
         message: "Update current user failed",
@@ -46,12 +44,12 @@ class UserController {
   };
 
   changePassword = async (req: Request, res: Response) => {
-    try{
+    try {
       const email = req.session.email as string;
-    const oldPassword = req.body.oldPassword as string;
-    const newPassword = req.body.newPassword as string;
+      const oldPassword = req.body.oldPassword as string;
+      const newPassword = req.body.newPassword as string;
 
-    await userService.changePassword(email, oldPassword, newPassword);
+      await userService.changePassword(email, oldPassword, newPassword);
 
       await new Promise<void>((resolve, reject) => {
         req.session.destroy((err) => {
@@ -66,8 +64,7 @@ class UserController {
         success: true,
         message: "Reset password successfully, please sign in again",
       });
-    }
-    catch(err){
+    } catch (err) {
       return res.status(400).json({
         success: false,
         message: "Reset password failed",

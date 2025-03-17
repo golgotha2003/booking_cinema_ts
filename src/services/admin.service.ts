@@ -2,7 +2,7 @@ import User from "../models/user";
 
 class AdminService {
     getAllUsers = async () => {
-        const users = await User.find({}).select("-password");
+        const users = await User.find().select("-password");
 
         return users;
     }
