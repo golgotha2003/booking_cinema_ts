@@ -141,7 +141,7 @@ class AuthController {
 
   verifyPassword = async (req: Request, res: Response) => {
     try {
-      const { email, otp} = req.body;
+      const { email, otp } = req.body;
 
       authService.verifyPassword(email, otp, req.session);
 
@@ -162,23 +162,7 @@ class AuthController {
     try {
       const { email, password } = req.body;
 
-      authService.resetPassword(email, password, req.session);
-
-      if (req.session.access_token) {
-        await new Promise<void>((resolve, reject) => {
-          req.session.destroy((err) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve();
-            }
-          });
-        });
-        return res.status(200).json({
-          success: true,
-          message: "Reset password successfully, please sign in again",
-        });
-      }
+      await authService.resetPassword(email, password);
 
       return res.status(200).json({
         success: true,

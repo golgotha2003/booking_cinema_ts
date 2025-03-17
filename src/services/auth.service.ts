@@ -5,7 +5,6 @@ import User from "../models/user";
 import { generateToken } from "../utils/token/generateToken";
 import { phoneValidator } from "../validator/phone.validator";
 import { verifyOtp } from "./otp.service";
-import { sendEmail } from "./email.service";
 
 class AuthService {
   signUp = async (user: SignUpRequestDto): Promise<AuthResponseDto> => {
@@ -57,7 +56,7 @@ class AuthService {
     await user.save();
 
     const token = generateToken(user.email);
-    return { message: "Sign up successfully", access_token: token, user: user };
+    return {message: "Sign up successfully", access_token: token, user: user };
   };
 
   forgotPassword = async(email: string) => {
@@ -79,22 +78,14 @@ class AuthService {
   resetPassword = async (
     email: string,
     password: string,
-    session: session.Session & Partial<session.SessionData>
   ) => {
     if (!email || !password) throw new Error("Missing email or password");
-
-    if (session.email)
-      if (session.email !== email) throw new Error("Unauthorized");
-      else if (!session.otp || session.otp.email !== email)
-        throw new Error("Invalid OTP");
 
     const user = await User.findOne({ email });
     if (!user) throw new Error("User not found");
 
     user.password = password;
     await user.save();
-
-    delete session.otp;
   };
 }
 
