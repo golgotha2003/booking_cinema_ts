@@ -3,6 +3,7 @@ import adminController from "../controllers/admin.controller";
 import movieController from "../controllers/movie.controller";
 import theaterController from "../controllers/theater.controller";
 import seatController from "../controllers/seat.controller";
+import showtimeController from "../controllers/showtime.controller";
 
 const router = Router();
 
@@ -84,6 +85,28 @@ router.delete(
   "/delete-seat",
   async (req: Request, res: Response, next: NextFunction) => {
     await seatController.deleteSeat(req, res).catch(next);
+  }
+);
+
+//Showtimes
+router.post(
+  "/create-showtime",
+  async (req: Request, res: Response, next: NextFunction) => {
+    await showtimeController.createShowtime(req, res).catch(next);
+  }
+);
+
+router.put(
+  "/update-showtime",
+  async (req: Request, res: Response, next: NextFunction) => {
+    await showtimeController.updateShowtime(req, res).catch(next);
+  }
+);
+
+router.delete(
+  "/delete-showtime",
+  async (req: Request, res: Response, next: NextFunction) => {
+    await showtimeController.deleteShowtime(req, res).catch(next);
   }
 );
 

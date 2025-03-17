@@ -10,7 +10,7 @@ class MovieController {
             return res.status(200).json({
                 success: true,
                 message: "Get all movies successfully",
-                movies: movies,
+                data: movies,
             });
         } catch (err) {
             return res.status(400).json({
@@ -29,7 +29,7 @@ class MovieController {
             return res.status(200).json({
                 success: true,
                 message: "Get movie by id successfully",
-                movie: movie,
+                data: movie,
             });
         } catch (err) {
             return res.status(400).json({
@@ -48,7 +48,7 @@ class MovieController {
             return res.status(200).json({
                 success: true,
                 message: "Search movie successfully",
-                movies: movies,
+                data: movies,
             });
         } catch (err) {
             return res.status(400).json({
@@ -67,7 +67,7 @@ class MovieController {
             return res.status(200).json({    
                 success: true,
                 message: "Get movies by genre successfully",
-                movies: movies,
+                data: movies,
             });
         } catch (err) {
             return res.status(400).json({
@@ -86,7 +86,7 @@ class MovieController {
             return res.status(201).json({
                 success: true,
                 message: "Add movie successfully",
-                movie: newMovie,
+                data: newMovie,
             });
         } catch (err) {
             return res.status(400).json({
@@ -106,7 +106,7 @@ class MovieController {
             return res.status(200).json({
                 success: true,
                 message: "Update movie successfully",
-                movie: updatedMovie,
+                data: updatedMovie,
             });
         } catch (err) {
             return res.status(400).json({
@@ -125,7 +125,7 @@ class MovieController {
             return res.status(200).json({
                 success: true,
                 message: "Delete movie successfully",
-                movie: deletedMovie,
+                data: deletedMovie,
             });        
         } catch (err) {
             return res.status(400).json({

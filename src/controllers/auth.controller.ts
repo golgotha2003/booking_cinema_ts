@@ -22,7 +22,7 @@ class AuthController {
         success: true,
         message:
           "Sign up successfully. Please check your email to verify your account.",
-        user: data.user,
+        data: data.user,
       });
     } catch (error) {
       return res.status(400).json({
@@ -45,7 +45,7 @@ class AuthController {
       return res.status(200).json({
         success: true,
         message: "Sign in successfully",
-        user: data.user,
+        data: data.user,
       });
     } catch (error) {
       return res.status(400).json({

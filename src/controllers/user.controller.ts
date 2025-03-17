@@ -12,7 +12,7 @@ class UserController {
       return res.status(200).json({
         success: true,
         message: "Get current user successfully",
-        user: user,
+        data: user,
       });
     } catch (err) {
       return res.status(400).json({
@@ -32,7 +32,7 @@ class UserController {
       return res.status(200).json({
         success: true,
         message: "Update current user successfully",
-        user: updateUser,
+        data: updateUser,
       });
     } catch (err) {
       return res.status(400).json({

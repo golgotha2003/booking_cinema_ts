@@ -9,7 +9,7 @@ class TheaterController {
             return res.status(200).json({
                 success: true,
                 message: "Get all theaters successfully",
-                theaters: theaters,
+                data: theaters,
             });
         }
         catch(err){
@@ -28,7 +28,7 @@ class TheaterController {
             return res.status(200).json({
                 success: true,
                 message: "Get theater by id successfully",
-                theater: theater,
+                data: theater,
             });
         }
         catch(err){
@@ -47,7 +47,7 @@ class TheaterController {
             return res.status(201).json({
                 success: true,
                 message: "Add theater successfully",
-                theater: newTheater,
+                data: newTheater,
             });
         }
         catch(err){
@@ -67,7 +67,7 @@ class TheaterController {
             return res.status(200).json({
                 success: true,
                 message: "Update theater successfully",
-                theater: updatedTheater,
+                data: updatedTheater,
             });
         }
         catch(err){
@@ -86,7 +86,7 @@ class TheaterController {
             return res.status(200).json({
                 success: true,
                 message: "Delete theater successfully",
-                theater: deletedTheater,
+                data: deletedTheater,
             });
         }
         catch(err){

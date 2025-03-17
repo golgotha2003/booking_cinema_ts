@@ -6,6 +6,7 @@ import adminRoute from "./admin.route";
 import movieRoute from "./movie.route";
 import theaterRoute from "./theater.route";
 import seatRoute from "./seat.route";
+import showtimeRoute from "./showtime.route";
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.use('/admin', authMiddleware.isAdmin, adminRoute);
 router.use('/movie', movieRoute);
 router.use('/theater', theaterRoute);
 router.use('/seat', seatRoute);
+router.use('/showtime', showtimeRoute);
 
 export default router;

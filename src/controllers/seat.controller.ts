@@ -10,7 +10,7 @@ class SeatController {
       return res.status(200).json({
         success: true,
         message: "Get seats by theater id successfully",
-        seats: seats,
+        data: seats,
       });
     } catch (err) {
       return res.status(400).json({
@@ -28,7 +28,7 @@ class SeatController {
       return res.status(201).json({
         success: true,
         message: "Add seat successfully",
-        seat: newSeat,
+        data: newSeat,
       });
     } catch (err) {
       return res.status(400).json({
@@ -46,7 +46,7 @@ class SeatController {
       return res.status(200).json({
         success: true,
         message: "Update seat successfully",
-        seat: updatedSeat,
+        data: updatedSeat,
       });
     } catch (err) {
       return res.status(400).json({
