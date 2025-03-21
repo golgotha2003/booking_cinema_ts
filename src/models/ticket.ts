@@ -33,6 +33,7 @@ const TicketSchema = new Schema<ITicket>(
     }
 );
 
+
 const Ticket = mongoose.model<ITicket>("Ticket", TicketSchema);
 
 export default Ticket;

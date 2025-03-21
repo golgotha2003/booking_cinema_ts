@@ -46,6 +46,11 @@ const MovieSchema = new Schema<IMovie>({
     trailer: {
         type: String,
         required: true
+    },
+    price: {
+        type: Number,
+        required: true,
+        min: 50000
     }
 }, { timestamps: true });
 

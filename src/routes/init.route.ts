@@ -7,6 +7,7 @@ import movieRoute from "./movie.route";
 import theaterRoute from "./theater.route";
 import seatRoute from "./seat.route";
 import showtimeRoute from "./showtime.route";
+import ticketRoute from "./ticket.route";
 
 const router = Router();
 
@@ -17,5 +18,6 @@ router.use('/movie', movieRoute);
 router.use('/theater', theaterRoute);
 router.use('/seat', seatRoute);
 router.use('/showtime', showtimeRoute);
+router.use('/ticket', ticketRoute);
 
 export default router;
