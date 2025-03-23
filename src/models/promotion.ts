@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IPromotion } from "../interfaces/iPromotion";
+import { PromotionType } from "../utils/promotion/type.enum";
 
 const PromotionSchema = new Schema<IPromotion>({
     code: {
@@ -17,6 +18,11 @@ const PromotionSchema = new Schema<IPromotion>({
     end_date: {
         type: Date,
         required: true,
+    },
+    type: {
+        type: String,
+        enum: Object.values(PromotionType),
+        default: PromotionType.ALL
     },
     condition: {
         type: String,

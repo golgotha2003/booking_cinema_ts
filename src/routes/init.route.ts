@@ -8,6 +8,7 @@ import theaterRoute from "./theater.route";
 import seatRoute from "./seat.route";
 import showtimeRoute from "./showtime.route";
 import ticketRoute from "./ticket.route";
+import promotionRoute from "./promotion.route";
 
 const router = Router();
 
@@ -19,5 +20,6 @@ router.use('/theater', theaterRoute);
 router.use('/seat', seatRoute);
 router.use('/showtime', showtimeRoute);
 router.use('/ticket', ticketRoute);
+router.use('/promotion', authMiddleware.isSignIn, promotionRoute);
 
 export default router;

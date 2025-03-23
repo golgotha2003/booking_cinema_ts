@@ -3,6 +3,10 @@ import { CurrentResponseDto } from "../dto/res/user.res.dto";
 import User from "../models/user";
 
 class UserService {
+    /**
+     * Get current user
+     * @param email user email
+     */
     getCurrent = async (email: string): Promise<CurrentResponseDto> => {
         const user = await User.findOne({ email }).select("avatar email full_name phone");
 
@@ -11,6 +15,10 @@ class UserService {
         return user.toObject() as CurrentResponseDto;
     }
 
+    /**
+     * Update current user
+     * @param user user information
+     */
     updateCurrent = async (user: CurrentResponseDto) => {
         const existingUser = await User.findOne({email: user.email});
 
@@ -25,6 +33,12 @@ class UserService {
         return existingUser.toObject() as CurrentResponseDto;
     }
 
+    /**
+     * Change user password
+     * @param email user email
+     * @param oldPassword old password
+     * @param newPassword new password
+     */
     changePassword = async (email: string, oldPassword: string, newPassword: string) => {
         const user = await User.findOne({email});
 

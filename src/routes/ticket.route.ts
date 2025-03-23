@@ -16,10 +16,6 @@ router.get('/get-tickets', authMiddleware.isSignIn, async (req: Request, res: Re
     await ticketController.getTicketsByUserId(req, res).catch(next);
 });
 
-router.get('/get-tickets-by-showtime-id', authMiddleware.isAdmin, async (req: Request, res: Response, next: NextFunction) => {
-    await ticketController.getTicketsByShowtimeId(req, res).catch(next);
-});
-
 router.get('/get-available-seats', async (req: Request, res: Response, next: NextFunction) => {
     await ticketController.getAvailableSeats(req, res).catch(next);
 });

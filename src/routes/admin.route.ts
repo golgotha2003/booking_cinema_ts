@@ -4,6 +4,8 @@ import movieController from "../controllers/movie.controller";
 import theaterController from "../controllers/theater.controller";
 import seatController from "../controllers/seat.controller";
 import showtimeController from "../controllers/showtime.controller";
+import ticketController from "../controllers/ticket.controller";
+import promotionController from "../controllers/promotion.controller";
 
 const router = Router();
 
@@ -109,5 +111,27 @@ router.delete(
     await showtimeController.deleteShowtime(req, res).catch(next);
   }
 );
+
+//Tickets
+router.get('/get-tickets-by-showtime-id', async (req: Request, res: Response, next: NextFunction) => {
+    await ticketController.getTicketsByShowtimeId(req, res).catch(next);
+});
+
+//Promotions
+router.post('/create-promotion', async (req: Request, res: Response, next: NextFunction) => {
+    await promotionController.createPromotion(req, res).catch(next);
+});
+
+router.put('/update-promotion', async (req: Request, res: Response, next: NextFunction) => {
+  await promotionController.updatePromotion(req, res).catch(next);
+});
+
+router.delete('/delete-promotion', async (req: Request, res: Response, next: NextFunction) => {
+  await promotionController.deletePromotion(req, res).catch(next);
+});
+
+router.get('/get-promotion-by-id', async (req: Request, res: Response, next: NextFunction) => {
+  await promotionController.getPromotionById(req, res).catch(next);
+});
 
 export default router;
