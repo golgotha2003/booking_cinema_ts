@@ -5,4 +5,5 @@ export interface IReview extends Document {
     movie_id: Types.ObjectId;
     rating: number;
     comment: string;
+    likes: number
 }

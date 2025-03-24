@@ -21,6 +21,10 @@ const ReviewSchema = new Schema<IReview>({
     },
     comment: {
         type: String
+    },
+    likes: {
+        type: Number,
+        default: 0
     }
 }, {
     timestamps: true
