@@ -9,6 +9,10 @@ const PaymentSchema = new Schema<IPayment>({
         ref: "Ticket",
         required: true,
     },
+    amount: {
+        type: Number,
+        required: true,
+    },
     method: {
         type: String,
         enum: Object.values(PaymentMethod),

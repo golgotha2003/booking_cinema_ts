@@ -4,8 +4,8 @@ export enum SeatType {
     DELUXE = "deluxe",
 }
 
-export const SeatMultipler: Record<SeatType, number> = {
-    [SeatType.STANDARD]: 1.0,
-    [SeatType.VIP]: 1.5,
-    [SeatType.DELUXE]: 2.0
+export const SeatPrice: Record<SeatType, number> = {
+    [SeatType.STANDARD]: 50000,
+    [SeatType.VIP]: 75000,
+    [SeatType.DELUXE]: 100000
 }

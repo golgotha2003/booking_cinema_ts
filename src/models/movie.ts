@@ -47,11 +47,6 @@ const MovieSchema = new Schema<IMovie>({
         type: String,
         required: true
     },
-    price: {
-        type: Number,
-        required: true,
-        min: 50000
-    }
 }, { timestamps: true });
 
 const Movie = mongoose.model<IMovie>("Movie", MovieSchema);

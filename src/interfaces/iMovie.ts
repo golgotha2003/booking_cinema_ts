@@ -13,5 +13,4 @@ export interface IMovie extends Document {
     status: MovieStatus;
     poster: string;
     trailer: string;
-    price: number;
 }
