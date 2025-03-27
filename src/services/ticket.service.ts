@@ -88,6 +88,14 @@ class TicketService {
         return tickets;
     }
 
+    getTicketById = async (ticketId: string) => {
+        const ticket = await Ticket.findById(ticketId);
+        if(!ticket) {
+            throw new Error("Ticket not found");
+        }
+        return ticket;
+    }
+
     /**
      * Validate ticket
      * @param ticketId Ticket id

@@ -12,6 +12,7 @@ const PaymentSchema = new Schema<IPayment>({
     amount: {
         type: Number,
         required: true,
+        min: 0
     },
     method: {
         type: String,
