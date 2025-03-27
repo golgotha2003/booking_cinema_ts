@@ -9,14 +9,21 @@ const app: Application = express();
 
 dotenv.config();
 
-app.use(cors());
+app.use(cors({
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SECRET_KEY as string,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie:{
+      secure: true,
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60
+    }
   })
 );
 

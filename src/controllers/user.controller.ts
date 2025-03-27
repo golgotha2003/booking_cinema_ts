@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import userService from "../services/user.service";
 import { CurrentResponseDto } from "../dto/res/user.res.dto";
+import { verifyToken } from "../utils/token/generateToken";
 
 class UserController {
   getCurrent = async (req: Request, res: Response) => {
     try {
-      const email = req.session.email as string;
+      const decoded = verifyToken(req.session.access_token as string);
 
-      const user = await userService.getCurrent(email);
+      const user = await userService.getCurrent(decoded.email);
 
       return res.status(200).json({
         success: true,
@@ -45,11 +46,11 @@ class UserController {
 
   changePassword = async (req: Request, res: Response) => {
     try {
-      const email = req.session.email as string;
+      const decoded = verifyToken(req.session.access_token as string);
       const oldPassword = req.body.oldPassword as string;
       const newPassword = req.body.newPassword as string;
 
-      await userService.changePassword(email, oldPassword, newPassword);
+      await userService.changePassword(decoded.email, oldPassword, newPassword);
 
       await new Promise<void>((resolve, reject) => {
         req.session.destroy((err) => {

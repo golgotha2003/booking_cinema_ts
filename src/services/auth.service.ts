@@ -48,7 +48,7 @@ class AuthService {
     if (user.is_locked === true)
       throw new Error("Your account is locked. Please contact admin.");
 
-    const token = generateToken(user.email);
+    const token = generateToken(user.email, user.role);
     return {
       message: "Sign in successfully",
       access_token: token,
@@ -76,7 +76,7 @@ class AuthService {
     user.is_active = true;
     await user.save();
 
-    const token = generateToken(user.email);
+    const token = generateToken(user.email, user.role);
     return {message: "Sign up successfully", access_token: token, user: user };
   };
 

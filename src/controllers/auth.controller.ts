@@ -3,6 +3,7 @@ import { SignUpRequestDto } from "../dto/req/user.req.dto";
 import authService from "./../services/auth.service";
 import { sendEmail } from "../services/email.service";
 import { generateOtp } from "../utils/otp/generateOtp";
+import { verifyToken } from "../utils/token/generateToken";
 
 class AuthController {
   signUp = async (req: Request, res: Response) => {
@@ -40,12 +41,12 @@ class AuthController {
       const data = await authService.signIn(email, password);
 
       req.session.access_token = data.access_token;
-      req.session.email = data.user?.email as string;
 
       return res.status(200).json({
         success: true,
         message: "Sign in successfully",
         data: data.user,
+        access_token: data.access_token,
       });
     } catch (error) {
       return res.status(400).json({
@@ -58,11 +59,9 @@ class AuthController {
 
   signOut = async (req: Request, res: Response) => {
     try {
-      if (!req.session.email)
-        return res.status(401).json({
-          success: false,
-          message: "Unauthorized",
-        });
+
+      const decoded = verifyToken(req.session.access_token as string);
+
       await new Promise<void>((resolve, reject) => {
         req.session.destroy((err) => {
           if (err) {
@@ -94,11 +93,12 @@ class AuthController {
       const data = await authService.verifySignUp(email, otp, req.session);
 
       req.session.access_token = data.access_token;
-      req.session.email = data.user?.email;
 
       return res.status(200).json({
         success: true,
         message: "Verify sign up successfully",
+        access_token: data.access_token,
+        data: data.user
       });
     } catch (error) {
       return res.status(400).json({

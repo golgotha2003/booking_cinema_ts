@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Role } from "../utils/user/role.enum";
 import User from "../models/user";
+import { verifyToken } from "../utils/token/generateToken";
 
 class AuthMiddleware {
   isSignIn = (req: Request, res: Response, next: NextFunction): void => {
@@ -24,16 +25,9 @@ class AuthMiddleware {
         return;
       }
   
-      const user = await User.findOne({ email: req.session.email });
-      if (!user) {
-        res.status(401).json({ 
-          success: false,
-          message: "Unauthorized",
-        });
-        return;
-      }
+      const decoded = verifyToken(req.session.access_token);
   
-      if (user.role !== Role.ADMIN) {
+      if (decoded.role !== Role.ADMIN) {
         res.status(403).json({
           success: false,
           message: "Forbidden",
