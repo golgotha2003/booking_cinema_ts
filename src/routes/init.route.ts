@@ -10,6 +10,7 @@ import showtimeRoute from "./showtime.route";
 import ticketRoute from "./ticket.route";
 import promotionRoute from "./promotion.route";
 import paymentRoute from "./payment.route";
+import uploadRoute from "./uploads.route";
 
 const router = Router();
 
@@ -23,5 +24,6 @@ router.use('/showtime', showtimeRoute);
 router.use('/ticket', ticketRoute);
 router.use('/promotion', authMiddleware.isSignIn, promotionRoute);
 router.use('/payment', authMiddleware.isSignIn, paymentRoute);
+router.use('/uploads', authMiddleware.isSignIn, uploadRoute);
 
 export default router;

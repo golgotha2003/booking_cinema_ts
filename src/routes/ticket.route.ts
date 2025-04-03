@@ -12,7 +12,7 @@ router.delete('/cancel-ticket/:id', authMiddleware.isSignIn, async (req: Request
     await ticketController.cancelTicket(req, res).catch(next);
 });
 
-router.get('/get-tickets', authMiddleware.isSignIn, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/', authMiddleware.isSignIn, async (req: Request, res: Response, next: NextFunction) => {
     await ticketController.getTicketsByUserId(req, res).catch(next);
 });
 

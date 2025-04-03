@@ -3,7 +3,7 @@ import seatController from "../controllers/seat.controller";
 
 const router = Router();
 
-router.get('/get-seats-by-theater-id/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     await seatController.getSeatsByTheaterId(req, res).catch(next);
 });
 

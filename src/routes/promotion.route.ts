@@ -3,11 +3,11 @@ import promotionController from "../controllers/promotion.controller";
 
 const router = Router();
 
-router.get('/get-all-promotions', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     await promotionController.getAllPromotions(req, res).catch(next);
 });
 
-router.post('/validation-promotion', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/validation', async (req: Request, res: Response, next: NextFunction) => {
     await promotionController.validationPromotion(req, res).catch(next);
 });
 

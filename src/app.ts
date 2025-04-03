@@ -10,7 +10,8 @@ const app: Application = express();
 dotenv.config();
 
 app.use(cors({
-  credentials: true
+  origin: "http://localhost:5173", // Chỉ định frontend Vite
+  credentials: true // Cho phép gửi cookies, sessions...
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

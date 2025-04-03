@@ -3,7 +3,7 @@ import userController from "../controllers/user.controller";
 
 const router = Router();
 
-router.get('/get-current', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     await userController.getCurrent(req, res).catch(next);
 });
 
